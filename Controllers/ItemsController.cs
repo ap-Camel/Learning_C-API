@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Catalog.Models;
 using Catalog.Repositories;
@@ -19,6 +20,15 @@ namespace Catalog.Controllers
         public IEnumerable<Item> GetItems() {
             var items = repository.GetItems();
             return items;
+        }
+
+        [HttpGet("{id}")]
+         public ActionResult<Item> GetItems(Guid id) {
+            var item = repository.GetItem(id);
+            if(item is null) {
+                return NotFound();
+            }
+            return item;
         }
     }
 }
