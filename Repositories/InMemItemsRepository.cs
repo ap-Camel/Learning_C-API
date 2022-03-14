@@ -2,19 +2,20 @@ using System.Collections.Generic;
 using Catalog.Models;
 using System;
 using System.Linq;
+using Catalog.Interfaces;
 
 namespace Catalog.Repositories
 {
-    public class InMemItemsRepository
+    public class InMemItemsRepository : IInMemItemsRepository
     {
-        private readonly List<Item> items = new() 
+        private readonly List<Item> items = new()
         {
-            new Item {Id = Guid.NewGuid(), name = "Potion", price = 9, createdDate = DateTimeOffset.UtcNow},
-            new Item {Id = Guid.NewGuid(), name = "Iron swrod", price = 20, createdDate = DateTimeOffset.UtcNow},
-            new Item {Id = Guid.NewGuid(), name = "Bronze shield", price = 18, createdDate = DateTimeOffset.UtcNow}
+            new Item { Id = Guid.NewGuid(), name = "Potion", price = 9, createdDate = DateTimeOffset.UtcNow },
+            new Item { Id = Guid.NewGuid(), name = "Iron swrod", price = 20, createdDate = DateTimeOffset.UtcNow },
+            new Item { Id = Guid.NewGuid(), name = "Bronze shield", price = 18, createdDate = DateTimeOffset.UtcNow }
         };
 
-        public IEnumerable<Item> GetItems() 
+        public IEnumerable<Item> GetItems()
         {
             return items;
         }
@@ -24,6 +25,6 @@ namespace Catalog.Repositories
             return items.Where(item => item.Id == id).SingleOrDefault();
         }
 
-        
+
     }
 }
